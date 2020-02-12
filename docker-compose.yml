@@ -1,0 +1,43 @@
+version: "3"
+services:
+  manager:
+     image: oprid/manager:1.0
+     volumes:
+       - ${OPRID_WWW}:/www
+       -  bus:/bus
+     tmpfs:
+       - /state
+  dns:
+     image: oprid/dns:1.0
+     ports:
+       - ${OPRID_EXPOSE_IP}:${OPRID_EXPOSE_DNS_PORT}:53/tcp
+       - ${OPRID_EXPOSE_IP}:${OPRID_EXPOSE_DNS_PORT}:53/udp
+     depends_on:
+       - manager
+     volumes:
+       -  bus:/bus
+
+  php-fpm:
+     image: oprid/php-fpm:7.4
+     depends_on:
+       - manager
+     volumes:
+       - ${OPRID_WWW}:/www
+       - bus:/bus
+
+  nginx:
+     image: oprid/nginx:1.0
+     ports:
+       - ${OPRID_EXPOSE_IP}:${OPRID_EXPOSE_HTTP_PORT}:80
+     depends_on:
+       - manager
+       - dns
+       - php-fpm
+     tmpfs:
+       - /vhost
+     volumes:
+       - ${OPRID_WWW}:/www
+       - bus:/bus
+
+volumes:
+  bus:
