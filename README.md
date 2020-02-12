@@ -29,7 +29,7 @@ Manual:
 127.0.0.1 example2.vhost example.vhost
 ```
 
-Automatic:
+Automatic DNS on Linux:
 ```
 # Enable OPRID DNS support
 sudo mv /etc/resolv.conf /etc/resolv.conf.oprid
@@ -37,3 +37,8 @@ sudo mv /etc/resolv.conf /etc/resolv.conf.oprid
 # Disable OPRID DNS support
 sudo mv /etc/resolv.conf.oprid /etc/resolv.conf
 ```
+
+Automatic DNS on Mac OS X:
+
+In System Prefrences->Network->Advanced->DNS (for current connection for ex: Ethernet or Wi-Fi)
+Add new nameserver to the list (as first entry).
