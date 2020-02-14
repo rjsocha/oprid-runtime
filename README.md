@@ -40,5 +40,5 @@ sudo mv /etc/resolv.conf.oprid /etc/resolv.conf
 
 Automatic DNS on Mac OS X:
 
-In System Prefrences->Network->Advanced->DNS (for current connection for ex: Ethernet or Wi-Fi)
-Add new nameserver to the list (as first entry).
+In System Prefrences->Network->Advanced->DNS (for current connection for example: Ethernet or Wi-Fi)
+Add new nameserver to the list (as first entry) -> 127.0.0.1
