@@ -26,6 +26,9 @@ catch-index
 
 # And run:
 touch example2.vhost
+
+# or on MacOS X (in www folder)
+touch ...
 ```
 
 Supported options for .ngaccess
