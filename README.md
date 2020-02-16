@@ -16,9 +16,23 @@ mkdir -p example.vhost/public
 
 Other options:
 
-Create configuration for Laravel project (vhost name will be example2.vhost)
+Create configuration for Laravel/Zend project (vhost name will be example2.vhost)
 ```
-mkdir -p example2.vhost.laravel/public
+mkdir -p example2.vhost/public
+
+#Create file example2.vhost/.ngaccess
+# With content:
+catch-index
+
+# And run:
+touch example2.vhost
+```
+
+Supported options for .ngaccess
+```
+catch-index   		-> all request goes to /index.php$is_args$args
+catch-all /abc.php 	-> all request goes to /abc.php
+error 404  /404.php	-> catch errors to /404.php
 ```
 
 DNS

@@ -1,5 +1,6 @@
 version: "3"
 services:
+
   manager:
      image: oprid/manager:1.0
      volumes:
@@ -7,6 +8,7 @@ services:
        -  bus:/bus
      tmpfs:
        - /state
+
   dns:
      image: oprid/dns:1.0
      ports:
@@ -29,6 +31,8 @@ services:
      image: oprid/nginx:1.0
      ports:
        - ${OPRID_EXPOSE_IP}:${OPRID_EXPOSE_HTTP_PORT}:80
+     environment:
+        - OPRID_NGINX_DEBUG=no
      depends_on:
        - manager
        - dns
@@ -39,5 +43,25 @@ services:
        - ${OPRID_WWW}:/www
        - bus:/bus
 
+  mariadb:
+    image: mariadb
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=oprid
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      default:
+        aliases:
+         - a.mysql.db
+  adminer:
+    image: adminer
+    restart: always
+    environment:
+      - ADMINER_DEFAULT_SERVER=mariadb
+    ports:
+      - 8080:8080
+
 volumes:
   bus:
+  mariadb:
